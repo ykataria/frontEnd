@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+</head>
+
+<body>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <div class="card z-depth-3" style="padding: 10px">
+                        <br>
+                        <p class="light-blue-text text-darken-3"
+                            style="font-size: 18px;font-weight: 600;margin-left: 5%">
+                            Submitted by : Yogesh
+                            &emsp;&emsp;
+                            Date : 12/12/2019
+                        </p>
+                        <br>
+                        <br>
+                        <div class="row">
+
+                            <div class="col s8 offset-s2">
+                                <p style="font-size: 18px;font-weight: 600;">
+                                    Score out of 100:
+                                </p>
+                                <br><br>
+                                <div>
+                                    <p class="range-field">
+                                        <input type="range" id="test5" min="0" max="100" />
+                                    </p>
+                                </div>
+                                <br>
+                                <div class="center">
+                                    <input style="width: 25%;text-align: center"
+                                        class="btn z-depth-4 light-blue darken-4" type="submit" value="Submit">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div id="content">
+                        <script>
+                            $(function () {
+                                $("#content").load("problem.html");
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+
+</html>

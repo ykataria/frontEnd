@@ -1,0 +1,35 @@
+{% extends "crowdapp/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div style="padding-top: 20px; padding-bottom: 20px">
+        <span class="light-blue-text text-darken-3" style="font-size: 25px; font-weight: 500">
+            Enter competition details
+        </span>
+    </div>
+    <br>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ c_form.media }}
+
+        {{ c_form }}
+
+        <br><br>
+
+        <div class="center">
+            <span style="color: coral; font-size: 18px; font-weight: 500;">Created By : {{user.username}}</span>
+            &emsp;&emsp;&emsp;&emsp;
+            <span style="color: coral; font-size: 18px; font-weight: 500">Department :
+                {{user.userdepartment.dept}}
+            </span>
+        </div>
+
+        <br><br>
+
+        <div class="center">
+            <input style="width: 25%;text-align: center" class="btn z-depth-4 light-blue darken-4" type="submit"
+                value="Submit for approval">
+        </div>
+    </form>
+</div>
+{% endblock content %}
