@@ -1,0 +1,105 @@
+{% extends 'crowdapp/base.html' %}
+
+{% block content %}
+
+<style>
+    .side a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: whitesmoke;
+        display: block;
+    }
+
+    .side a:hover {
+        color: #064579;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col s8 offset-s4">
+        <h5 style="font-weight: 600" class="light-blue-text text-darken-3">
+            All Competitions
+        </h5>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col s4 m4 l4">
+        <div style="position: fixed; top: 35%" class="card light-blue darken-4 z-depth-3">
+            <div class="card-content white-text">
+                <span style="font-weight: 600" class="card-title center">Menu</span>
+                <div class="divider"></div>
+                <div class="side center">
+                    <br>
+                    <a href="{% url 'comp-home' %}">All Competitions</a>
+                    <a href="{% url 'my-hosted-comp' %}">Hosted Competitions</a>
+                    <a href="{% url 'my-comp' %}">My Competitions</a>
+                    <a href="{% url 'add-comp' %}">Host a Competition</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s8 m8 l8">
+        {% for comp in competitions %}
+        {% if comp.is_approved == True %}
+
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div style="margin-left: 5%" class="card-content">
+                    <a style="font-size: 22px; color: #064579; font-weight: 600;"
+                        href="{% url 'comp-detail' comp.id %}">{{ comp.name }}</a>
+                    <p style="margin-top: 10px">Competion description which tells something about the competiton in just a small sentence as it
+                        give a brief information about the inside content...</p>
+                    <br>
+                    <span style="font-weight: 600"><i style="font-size: 30px; color:chocolate" class="material-icons left">people</i> 20
+                        participants&emsp;&emsp;Created By : {{ comp.created_by }}&emsp;&emsp;Department Hosting :
+                        {{ comp.created_by.userdepartment.dept }}</span>
+
+                </div>
+                <div style="margin-left: 5%" class="card-action">
+                    <a style="color:chocolate; font-weight: 600">Competition ends on : {{ comp.start_date|date:"F d, Y" }}</a>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+        {% if is_paginated %}
+
+        {% for num in page_obj.paginator.page_range %}
+
+        {% endfor %}
+    </div>
+
+</div>
+
+
+{% if page_obj.has_previous and page_obj.has_next %}
+<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+<h2 class="btn btn-outline-info mb-4">{{ page_obj.number }}</h2>
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+
+{% elif page_obj.has_previous %}
+<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+<h2 class="btn btn-outline-info mb-4">{{ page_obj.number }}</h2>
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+
+{% elif page_obj.has_next %}
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+<h2 class="btn btn-outline-info mb-4">{{ page_obj.number }}</h2>
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+{% endif %}
+
+
+{% endif %}
+
+
+
+{% endblock %}
