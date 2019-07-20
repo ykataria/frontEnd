@@ -1,0 +1,72 @@
+{% extends 'crowdapp/base.html' %}
+
+{% block content %}
+
+
+<br>
+<div class="right-align">
+  <a class="btn z-depth-3 light-blue darken-3" href="submissions/">View Submissions</a>
+  &emsp;&emsp;
+  <a class="btn z-depth-3 light-blue darken-3" href="submissions/">Leaderboard</a>
+</div>
+<br>
+<div class="card z-depth-3" style="padding: 35px">
+  <h5 class="light-blue-text darken-3" style="font-weight: 600">{{ competitions.name }}</h5>
+  <br>
+  {{ competitions.description|safe }}
+  <br>
+  {% if competitions.train_data %}
+  <a class="mr-2" href="http://localhost:8000{{ competitions.train_data.url }}">
+    <p class="btn light-blue darken-3 z-depth-3"> Download Training data</p>
+  </a>
+  &emsp;&emsp;
+  {% endif %}
+  {% if competitions.test_data %}
+  <a class="mr-2" href="http://localhost:8000{{ competitions.test_data.url }}">
+    <p class="btn light-blue darken-3 z-depth-3"> Download Test data</p>
+  </a>
+  {% endif %}
+
+  <br>
+  <br><br>
+  {% if user.is_authenticated and user != competitions.created_by %}
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ s_form.media }}
+    {{ s_form }}
+    <br>
+    <br>
+  
+    <br>
+    <div class="center">
+      <input style="width: 25%;text-align: center" class="btn z-depth-4 light-blue darken-4" class="btn" type="submit"
+        value="Submit">
+    </div>
+  </form>
+  {% elif user.is_authenticated and user == competitions.created_by %}
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ s_form.media }}
+    {{ s_form }}
+
+    <input type="text" name="firstname" value=" Submitted By : {{ user.username }}" disabled>
+
+    <input type="submit" value="Submit" disabled>
+  </form>
+  <h6>You are hosting this competition. You cannot make submissions.</h6>
+  {% else %}
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ s_form.media }}
+    {{ s_form }}
+
+    <input type="text" name="firstname" value="Submitted By : Please Log in" disabled>
+
+    <input type="submit" value="Submit" disabled>
+  </form>
+  <h6>You must be logged in to make a submission</h6>
+
+  {% endif %}
+</div>
+
+{% endblock %}
